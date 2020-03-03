@@ -19,4 +19,16 @@ module ActionView
       return original_extract_handler_and_format_and_variant(*args)
     end
   end
+
+  # https://github.com/codetriage/maildown/issues/53
+  class PartialRenderer
+    alias :original_find_partial :find_partial
+
+    def find_partial(*args)
+      template = original_find_partial(*args)
+      template.instance_variable_set('@format', formats.first)
+      template
+    end
+  end
 end
+
