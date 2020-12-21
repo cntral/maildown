@@ -22,10 +22,10 @@ module ActionView
 
   # https://github.com/codetriage/maildown/issues/53
   class PartialRenderer
-    alias :original_find_partial :find_partial
+    alias :original_find_template :find_template
 
-    def find_partial(*args)
-      template = original_find_partial(*args)
+    def find_template(*args)
+      template = original_find_template(*args)
       template.instance_variable_set('@format', formats.first)
       template
     end
