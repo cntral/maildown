@@ -21,10 +21,12 @@ module Maildown
     @maildown_markdown_engine_text_block = nil
 
     def self.to_html(string)
+      string = string.to_s if string.ia_a?(ActionView::OutputBuffer) # Needed for Rails 7.1 support. See https://github.com/zombocom/maildown/pull/71
       html_block.call(string)
     end
 
     def self.to_text(string)
+      string = string.to_s if string.ia_a?(ActionView::OutputBuffer) # Needed for Rails 7.1 support. See https://github.com/zombocom/maildown/pull/71
       text_block.call(string)
     end
 
